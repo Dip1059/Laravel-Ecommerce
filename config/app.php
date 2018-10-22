@@ -215,5 +215,7 @@ return [
         'Filesystem' => Illuminate\Filesystem\Filesystem::class,
 
     ],
+	
+	'log' => 'errorlog',
 
 ];
