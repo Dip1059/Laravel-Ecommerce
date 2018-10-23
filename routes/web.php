@@ -73,6 +73,8 @@ Route::get('/del_cart/{rowId}','CartCont@delcart');
 //Customer Routes
 Route::get('/checkout','CustomerCont@checkout');
 Route::post('/save_cus','CustomerCont@savecus');
+Route::get('/cus_logout','CustomerCont@clogout');
+Route::post('/cus_logcheck','CustomerCont@clogcheck');
 Route::get('/bill_to','CustomerCont@billto');
 Route::post('/save_billto','CustomerCont@savebillto');
 Route::post('/save_pay','CustomerCont@savepay');

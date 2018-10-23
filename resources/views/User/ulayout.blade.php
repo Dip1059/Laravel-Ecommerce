@@ -88,9 +88,19 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="{{URL::to('/show_cart')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                @php
+                                    $cus_id=Session::get('cus_id');
+                                    $data=DB::table('customer')
+                                            ->where('cus_id',$cus_id)
+                                            ->first();
+                                @endphp
+                                @if($cus_id)
+                                    <li><a href="{{URL::to('/cus_logout')}}"><i class="fa fa-lock"></i><b>{{$data->cus_name}}</b> Logout</a></li>
+                                @else
+                                    <li><a href="{{URL::to('/checkout')}}"><i class="fa fa-lock"></i>Login</a></li>
+
+                                @endif
                             </ul>
                         </div>
                     </div>

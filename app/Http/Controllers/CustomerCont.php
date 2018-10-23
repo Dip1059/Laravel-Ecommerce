@@ -32,7 +32,13 @@ class CustomerCont extends Controller
 
     public function billto()
     {
-    	return view('User.billto');
+    	$cus_id=Session::get('cus_id');
+    	$total=Cart::total();
+    	if($cus_id && $total>0)
+			return view('User.billto');
+    	else
+    		return Redirect::to('/');
+    		
     }
 
     public function savebillto(Request $req)
@@ -91,8 +97,34 @@ class CustomerCont extends Controller
     		DB::table('order_details')
     			->insert($ordsdata);
     	}
-    	Session::flush();
+    	Session::put('bill_id',null);
     	Cart::destroy();
     	return view('User.success');
+    }
+
+    public function clogout()
+    {
+    	Session::flush();
+    	return Redirect::to('/');
+    }
+
+    public function clogcheck(Request $req)
+    {
+    	$email=$req->email;
+    	$pass=md5($req->pass);
+
+    	$success=DB::table('customer')
+    				->where([['cus_email','=',$email],['cus_pass','=',$pass]])
+    				->first();
+    	if($success)
+		{    
+			Session::put('cus_id',$success->cus_id);
+			return Redirect::to('/show_cart');
+		}
+		else
+		{
+			Session::put('msg','Wrong Credentials');
+			return Redirect::to('/checkout');
+		}
     }
 }

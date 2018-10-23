@@ -1,6 +1,13 @@
 @extends('User.ulayout')
 @section('content')
-    
+    @php
+    $msg=Session::get('comsg');
+    if($msg)
+    {
+        echo "<p class='alert alert-danger'>".$msg."</p>";
+        Session::put('comsg',null);
+    }
+@endphp
     <section id="slider"><!--slider-->
         <div class="container">
             <div class="row">

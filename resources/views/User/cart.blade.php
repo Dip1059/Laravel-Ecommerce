@@ -3,12 +3,7 @@
 
 <section id="cart_items">
 		<div class="container">
-			<div class="breadcrumbs">
-				<ol class="breadcrumb">
-				  <li><a href="#">Home</a></li>
-				  <li class="active">Shopping Cart</li>
-				</ol>
-			</div>
+			
 			<div class="col-sm-12">
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
@@ -72,11 +67,22 @@
 						</ul>
 						@php
 							$bill_id=Session::get('bill_id');
+							$cus_id=Session::get('cus_id');
+							$total=Cart::total();
 						@endphp
 							@if($bill_id)
-							
+								
 							@else
-								<a class="btn btn-default check_out" href="{{URL::to('/checkout')}}">Check Out</a>
+								@if($cus_id && $total>0)
+									<a class="btn btn-default check_out" href="{{URL::to('/bill_to')}}">Check Out</a>
+								@elseif($total>0)
+									<a class="btn btn-default check_out" href="{{URL::to('/checkout')}}">Check Out</a>
+								@else
+									@php
+										Session::put('comsg','Please select one product at least to checkout.');
+									@endphp
+									<a class="btn btn-default check_out" href="{{URL::to('/')}}">Check Out</a>
+								@endif
 							@endif
 					</div>
 				</div>
