@@ -52,6 +52,11 @@ Route::get('/delete_pro/{pro_id}','AproCont@deletepro');
 //Order Routes
 Route::get('/order','AorderCont@order');
 Route::get('/show_ord/{ord_id}','AorderCont@showord');
+Route::get('/done_pay/{pay_id}/{ord_id}','AorderCont@donepay');
+Route::get('/pend_pay/{pay_id}/{ord_id}','AorderCont@pendpay');
+Route::get('/pend_ord/{ord_id}','AorderCont@pendord');
+Route::get('/deliv_ord/{ord_id}','AorderCont@delivord');
+Route::get('/delete_ord/{ord_id}','AorderCont@deleteord');
 
 /****Admin Routes****/
 

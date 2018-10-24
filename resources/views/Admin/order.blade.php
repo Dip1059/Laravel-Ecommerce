@@ -14,7 +14,8 @@ $msg=Session::get('msg');
 								  <th>Order Id</th>
 								  <th>Customer Name</th>
 								  <th>Order Total</th>
-								  <th>Status</th>
+								  <th>Payment Status</th>
+								  <th>Delivery Status</th>
 								  <th>Actions</th>
 							  </tr>
 						  </thead>   
@@ -24,6 +25,17 @@ $msg=Session::get('msg');
 								<td>{{$ord->ord_id}}</td>
 								<td class="center">{{$ord->cus_name}}</td>
 								<td class="center">{{$ord->ord_total}}</td>
+								<td class="center">
+									@if($ord->pay_status==1)
+									
+										<span class="label label-success">Done</span>
+									
+									@else
+									
+										<span class="label">Pending</span>
+									
+									@endif
+								</td>
 								<td class="center">
 									@if($ord->ord_status==1)
 									

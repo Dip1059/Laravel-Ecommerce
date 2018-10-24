@@ -43,6 +43,9 @@ $msg=Session::get('msg');
 								  <th>Address</th>
 								  <th>Phone No</th>
 								  <th>Email</th>
+								  <th>Payment Method</th>
+								  <th>Payment Status</th>
+								  <th>Action</th>
 							  </tr>
 						  </thead>   
 						  <tbody>
@@ -53,6 +56,31 @@ $msg=Session::get('msg');
 								<td>{{$billto->bill_addr}}</td>
 								<td>{{$billto->bill_phone}}</td>
 								<td>{{$billto->bill_email}}</td>
+								<td>{{$billto->pay_method}}</td>
+								<td class="center">
+									@if($billto->pay_status==1)
+									
+										<span class="label label-success">Done</span>
+									
+									@else
+									
+										<span class="label">Pending</span>
+									
+									@endif
+								</td>
+								<td class="center">
+										@if($billto->pay_status==1)
+											<a class="btn" href="{{URL::to('/pend_pay/'.$billto->pay_id,$billto->ord_id)}}">
+												<span class="halflings-icon white thumbs-down"></span>  
+											</a>
+
+										@else
+											<a class="btn btn-success" href="{{URL::to('/done_pay/'.$billto->pay_id,$billto->ord_id)}}">
+												<span class="halflings-icon white thumbs-up"></span>  
+											</a>
+										@endif
+								</td>
+								<td></td>
 							</tr>
 							
 						</tbody>
